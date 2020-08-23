@@ -1,10 +1,9 @@
 #include "debug.h"
-
-#include <stdarg.h>
-
 #include "flags.h"
+#include <stdarg.h>
+#include <stdio.h>
 
-void debug(const char *format, ...) {
+void debug(const char* format, ...) {
   if (DEBUG) {
     va_list args;
     va_start(args, format);
@@ -12,6 +11,6 @@ void debug(const char *format, ...) {
     printf("\n");
     va_end(args);
   } else {
-    printf("ignoring print");
+    printf("ignoring print\n");
   }
 }
