@@ -1,8 +1,8 @@
 #ifndef AGENT_H
 #define AGENT_H
 
-#include "position.hpp"
-#include <map>
+#include "coordinate.hpp"
+#include <unordered_map>
 
 enum class Status {
   Normal,
@@ -14,20 +14,18 @@ enum class Status {
 namespace StatusTime {
   const int Immune = 5;
   const int Infected = 5;
-}; // namespace StatusTime
+} // namespace StatusTime
 
 class Agent {
+  public:
   Status status;
   int time_in_status;
   int age;
   Point position;
 
-  public:
   Agent(Point initial_position);
   void move(Point new_position);
-  Point get_position(void) const;
-  Status get_status(void) const;
-  void update(std::map<Point, Agent*> space);
+  void update(bool infected_nearby);
 };
 
 #endif

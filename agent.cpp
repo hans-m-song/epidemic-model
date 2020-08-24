@@ -1,22 +1,26 @@
 #include "agent.hpp"
+#include "coordinate.hpp"
 #include "debug.h"
-#include "position.hpp"
-#include <cstdlib>
 
 Agent::Agent(Point initial_position) { position = initial_position; }
 
 void Agent::move(Point new_position) { position = new_position; }
 
-Point Agent::get_position(void) const { return position; }
-
-void Agent::update(std::map<Point, Agent*> space) {
-  if (status == Status::Deceased) {
-    debug("updating dead agent");
-    return;
-  }
-
+void Agent::update(bool infected_nearby) {
   switch (status) {
     case Status::Normal:
+      if (infected_nearby) { // TODO transmission rate
+        time_in_status = 0;
+        status = Status::Infected;
+      }
+      break;
+    case Status::Infected:
+      time_in_status += 1;
+      if (time_in_status > StatusTime::Infected) {
+        time_in_status = 0;
+        status = Status::Immune;
+      }
+      time_in_status += 1;
       break;
     case Status::Immune:
       time_in_status += 1;
@@ -24,9 +28,9 @@ void Agent::update(std::map<Point, Agent*> space) {
         time_in_status = 0;
         status = Status::Normal;
       }
-    case Status::Infected:
-      time_in_status += 1;
-    default:
+      break;
+    case Status::Deceased:
+      debug("warning: updating deceased agent");
       break;
   }
 

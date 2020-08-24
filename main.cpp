@@ -6,7 +6,7 @@ int main(int argc, char** argv) {
   Epidemic* epidemic = new Epidemic(INITIAL_AGENTS);
 
   for (int i = 0; i < MAX_TICKS; i++) {
-    debug("tick %d\n", i);
+    debug("tick %d", i);
     epidemic->tick();
   }
 

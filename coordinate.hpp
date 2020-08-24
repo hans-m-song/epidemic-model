@@ -1,8 +1,10 @@
-#ifndef POSITION_H
-#define POSITION_H
+#ifndef COORDINATE_H
+#define COORDINATE_H
 
 #include "flags.h"
-#include <vector>
+#include <utility>
+
+typedef std::pair<int, int> Point;
 
 namespace Coordinate {
   namespace X {
@@ -17,12 +19,13 @@ namespace Coordinate {
   } // namespace Y
 } // namespace Coordinate
 
-typedef std::pair<int, int> Point;
-
 Point new_point();
 
 Point new_point(int x, int y);
 
-enum Direction { N, NE, E, SE, S, SW, W, NW };
+namespace Direction {
+  enum Type { N, NE, E, SE, S, SW, W, NW };
+  Point apply(Point point, Direction::Type direction);
+} // namespace Direction
 
 #endif

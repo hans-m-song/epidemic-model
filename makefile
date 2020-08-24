@@ -1,6 +1,6 @@
 CXX=g++
-CXXFLAGS = -Wall -pedantic -g -std=c++11
-OBJ = agent.o debug.o epidemic.o main.o position.o util.o
+CXXFLAGS = -Wall -pedantic -g -std=c++14
+OBJ = util.o debug.o coordinate.o agent.o coordinate_map.o epidemic.o main.o
 
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<

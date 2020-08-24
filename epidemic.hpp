@@ -2,14 +2,13 @@
 #define EPIDEMIC_H
 
 #include "agent.hpp"
-#include "position.hpp"
-#include <map>
+#include "coordinate.hpp"
+#include "coordinate_map.hpp"
 
 class Epidemic {
-  std::map<Point, Agent*> space;
+  CoordinateMap space;
   int ticks;
-
-  void add_agent();
+  void add_agent(void);
 
   public:
   Epidemic(int initial_agent_count);

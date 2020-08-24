@@ -1,10 +1,10 @@
 #ifndef DEBUG
 #include <stdbool.h>
-#define DEBUG false
+#define DEBUG true
 #endif
 
 #ifndef MAX_TICKS
-#define MAX_TICKS 100
+#define MAX_TICKS 5
 #endif
 
 #ifndef INITIAL_AGENTS
