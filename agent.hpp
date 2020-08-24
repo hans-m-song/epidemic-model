@@ -23,7 +23,7 @@ class Agent {
   int age;
   Point position;
 
-  Agent(Point initial_position);
+  Agent(Point initial_position, bool infected);
   void move(Point new_position);
   void update(bool infected_nearby);
 };

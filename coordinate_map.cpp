@@ -5,13 +5,19 @@
 CoordinateMap::CoordinateMap(int x_bound, int y_bound)
     : x_bound(x_bound), y_bound(y_bound) {}
 
-CoordinateMap::~CoordinateMap() { map.clear(); }
+CoordinateMap::~CoordinateMap() {
+  for (auto i : map) {
+    delete i.second;
+  }
+
+  map.clear();
+}
 
 bool CoordinateMap::is_empty(Point point) {
   return map.find(point) == map.end();
 }
 
-bool CoordinateMap::add_element(Point point, Agent* element) {
+bool CoordinateMap::add_agent(Point point, Agent* element) {
   if (is_empty(point)) {
     map[point] = element;
     return true;

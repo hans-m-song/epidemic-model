@@ -24,7 +24,7 @@ class CoordinateMap {
   Map map;
   CoordinateMap(int x_bound, int y_bound);
   ~CoordinateMap();
-  bool add_element(Point point, Agent* element);
+  bool add_agent(Point point, Agent* element);
   bool is_empty(Point point);
   Point get_empty_point();
   Point get_empty_point(Point origin);

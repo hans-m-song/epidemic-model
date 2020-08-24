@@ -2,7 +2,10 @@
 #include "coordinate.hpp"
 #include "debug.h"
 
-Agent::Agent(Point initial_position) { position = initial_position; }
+Agent::Agent(Point initial_position, bool infected) {
+  position = initial_position;
+  status = infected ? Status::Infected : Status::Normal;
+}
 
 void Agent::move(Point new_position) { position = new_position; }
 

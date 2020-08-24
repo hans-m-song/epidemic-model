@@ -10,17 +10,18 @@ Epidemic::Epidemic(int initial_agent_count, int width, int height) {
   for (int i = 0; i < initial_agent_count; i++) {
     debug("new agent %d", i);
     Point point = space->get_empty_point();
-    space->add_element(point, new Agent(point));
+    space->add_agent(point, new Agent(point, false));
   }
 }
 
 Epidemic::~Epidemic() { delete space; }
 
 void Epidemic::tick(void) {
+  Point point;
   for (auto i : space->map) {
     // TODO check out of bounds
-    i.second->move(
-        new_point(i.second->position.first, i.second->position.second));
+    point = new_point(i.second->position.first, i.second->position.second);
+    i.second->move(point);
   }
 
   for (auto i : space->map) {
