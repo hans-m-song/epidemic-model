@@ -1,6 +1,7 @@
 #include "agent.hpp"
 #include "coordinate.hpp"
 #include "debug.h"
+#include "parameters.hpp"
 
 Agent::Agent(Point initial_position, bool infected) {
   position = initial_position;
@@ -19,7 +20,7 @@ void Agent::update(bool infected_nearby) {
       break;
     case Status::Infected:
       time_in_status += 1;
-      if (time_in_status > StatusTime::Infected) {
+      if (time_in_status > Parameters::InfectedDuration) {
         time_in_status = 0;
         status = Status::Immune;
       }
@@ -27,7 +28,7 @@ void Agent::update(bool infected_nearby) {
       break;
     case Status::Immune:
       time_in_status += 1;
-      if (time_in_status > StatusTime::Immune) {
+      if (time_in_status > Parameters::ImmuneDuration) {
         time_in_status = 0;
         status = Status::Normal;
       }

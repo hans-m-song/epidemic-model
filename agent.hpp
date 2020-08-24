@@ -11,11 +11,6 @@ enum class Status {
   Deceased,
 };
 
-namespace StatusTime {
-  const int Immune = 5;
-  const int Infected = 5;
-} // namespace StatusTime
-
 class Agent {
   public:
   Status status;

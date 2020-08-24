@@ -17,9 +17,19 @@ bool CoordinateMap::is_empty(Point point) {
   return map.find(point) == map.end();
 }
 
-bool CoordinateMap::add_agent(Point point, Agent* element) {
+bool CoordinateMap::add_agent(Point point, Agent* agent) {
   if (is_empty(point)) {
-    map[point] = element;
+    map[point] = agent;
+    return true;
+  }
+
+  return false;
+}
+
+bool CoordinateMap::remove_agent(Point point, Agent* agent) {
+  if (!is_empty(point) && map[point] == agent) {
+    delete agent;
+    map.erase(point);
     return true;
   }
 
@@ -28,14 +38,14 @@ bool CoordinateMap::add_agent(Point point, Agent* element) {
 
 Point CoordinateMap::get_empty_point() {
   int max_capacity = x_bound * y_bound;
-  if (map.size() > max_capacity) {
+  if (map.size() > (size_t)max_capacity) {
     debug("map is at maximum capacity %d", max_capacity);
     return new_point(-1, -1);
   }
 
   Point point;
   for (int i = 0; i < max_capacity; i++) {
-    point = bounded_point(x_bound, y_bound);
+    point = new_bounded_point(x_bound, y_bound);
     if (map.find(point) == map.end()) {
       return point;
     }
