@@ -6,11 +6,10 @@
 #include "coordinate_map.hpp"
 
 class Epidemic {
-  CoordinateMap space;
-  int ticks;
+  CoordinateMap* space;
 
   public:
-  Epidemic(int initial_agent_count);
+  Epidemic(int initial_agent_count, int width, int height);
   ~Epidemic();
   void tick(void);
 };

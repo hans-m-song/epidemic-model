@@ -23,6 +23,8 @@ Point new_point();
 
 Point new_point(int x, int y);
 
+Point bounded_point(int x_bound, int y_bound);
+
 namespace Direction {
   enum Type { N, NE, E, SE, S, SW, W, NW };
   Point apply(Point point, Direction::Type direction);

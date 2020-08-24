@@ -14,14 +14,20 @@ struct hash_pair {
   }
 };
 
-typedef std::unordered_map<Point, Agent*, hash_pair> CoordinateMap;
+typedef std::unordered_map<Point, Agent*, hash_pair> Map;
 
-bool add_element(CoordinateMap space, Point point, Agent* element);
+class CoordinateMap {
+  int x_bound;
+  int y_bound;
 
-bool is_empty(CoordinateMap space, Point point);
-
-Point get_empty_point(CoordinateMap space);
-
-Point get_empty_point(CoordinateMap space, Point origin);
+  public:
+  Map map;
+  CoordinateMap(int x_bound, int y_bound);
+  ~CoordinateMap();
+  bool add_element(Point point, Agent* element);
+  bool is_empty(Point point);
+  Point get_empty_point();
+  Point get_empty_point(Point origin);
+};
 
 #endif

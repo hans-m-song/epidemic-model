@@ -2,30 +2,35 @@
 #include "agent.hpp"
 #include "debug.h"
 
-bool is_empty(CoordinateMap space, Point point) {
-  return space.find(point) == space.end();
+CoordinateMap::CoordinateMap(int x_bound, int y_bound)
+    : x_bound(x_bound), y_bound(y_bound) {}
+
+CoordinateMap::~CoordinateMap() { map.clear(); }
+
+bool CoordinateMap::is_empty(Point point) {
+  return map.find(point) == map.end();
 }
 
-bool add_element(CoordinateMap space, Point point, Agent* element) {
-  if (is_empty(space, point)) {
-    space[point] = element;
+bool CoordinateMap::add_element(Point point, Agent* element) {
+  if (is_empty(point)) {
+    map[point] = element;
     return true;
   }
 
   return false;
 }
 
-Point get_empty_point(CoordinateMap space) {
-  int max_capacity = Coordinate::X::Max * Coordinate::Y::Max - 2;
-  if (space.size() > max_capacity) {
-    debug("space is at maximum capacity %d", max_capacity);
+Point CoordinateMap::get_empty_point() {
+  int max_capacity = x_bound * y_bound;
+  if (map.size() > max_capacity) {
+    debug("map is at maximum capacity %d", max_capacity);
     return new_point(-1, -1);
   }
 
   Point point;
   for (int i = 0; i < max_capacity; i++) {
-    point = new_point();
-    if (space.find(point) == space.end()) {
+    point = bounded_point(x_bound, y_bound);
+    if (map.find(point) == map.end()) {
       return point;
     }
   }
@@ -33,11 +38,11 @@ Point get_empty_point(CoordinateMap space) {
   return new_point(-1, -1);
 }
 
-Point get_empty_point(CoordinateMap space, Point origin) {
+Point CoordinateMap::get_empty_point(Point origin) {
   Point point;
   for (int i = Direction::N; i <= Direction::NE; i++) {
     point = Direction::apply(origin, (Direction::Type)i);
-    if (is_empty(space, point)) {
+    if (is_empty(point)) {
       return point;
     }
   }

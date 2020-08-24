@@ -1,6 +1,6 @@
 #ifndef DEBUG
 #include <stdbool.h>
-#define DEBUG false
+#define DEBUG true
 #endif
 
 #ifndef MAX_TICKS

@@ -6,6 +6,7 @@
 int Coordinate::X::rand(void) {
   return ::rand(Coordinate::X::Min, Coordinate::X::Max);
 }
+
 int Coordinate::Y::rand(void) {
   return ::rand(Coordinate::Y::Min, Coordinate::Y::Max);
 }
@@ -16,14 +17,13 @@ Point new_point() {
   return new_point(x, y);
 };
 
-Point new_point(int x, int y) {
-  if (x < Coordinate::X::Min || x > Coordinate::X::Max || y < Coordinate::Y::Min
-      || y > Coordinate::Y::Max) {
-    debug("<%d, %d> out of coordinate bounds", x, y);
-  }
+Point new_point(int x, int y) { return std::pair<int, int>(x, y); };
 
-  return std::make_pair(x, y);
-};
+Point bounded_point(int x_bound, int y_bound) {
+  int x = ::rand(0, x_bound);
+  int y = ::rand(0, y_bound);
+  return new_point(x, y);
+}
 
 Point Direction::apply(Point origin, Direction::Type direction) {
   int x = origin.first;
