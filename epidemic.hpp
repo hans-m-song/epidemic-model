@@ -8,7 +8,6 @@
 class Epidemic {
   CoordinateMap space;
   int ticks;
-  void add_agent(void);
 
   public:
   Epidemic(int initial_agent_count);

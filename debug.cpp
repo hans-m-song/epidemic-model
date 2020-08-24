@@ -10,7 +10,5 @@ void debug(const char* format, ...) {
     vprintf(format, args);
     printf("\n");
     va_end(args);
-  } else {
-    printf("ignoring print\n");
   }
 }

@@ -7,7 +7,6 @@ bool is_empty(CoordinateMap space, Point point) {
 }
 
 bool add_element(CoordinateMap space, Point point, Agent* element) {
-  debug("coordinatespace adding element");
   if (is_empty(space, point)) {
     space[point] = element;
     return true;

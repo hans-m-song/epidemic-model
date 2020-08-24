@@ -32,3 +32,4 @@
 *.app
 
 epidemic
+.DS_Store
